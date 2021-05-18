@@ -44,20 +44,21 @@ func (service *DNSService) Unregister() {
 	}
 }
 
-func (service *DNSService) UpdateRecord(key, value string) int {
+func (service *DNSService) UpdateRecord(updateKey, updateValue string) int {
 	if service.ServiceRef != nil {
-		service.Config.Records[key] = value
+		service.Config.Records[updateKey] = updateValue
 
-		keyC := C.CString(key)
-		valueC := C.CString(value)
-		defer C.free(unsafe.Pointer(keyC))
-		defer C.free(unsafe.Pointer(valueC))
+		for key := range service.Config.Records {
+			value := service.Config.Records[key]
+			keyC := C.CString(key)
+			valueC := C.CString(value)
+			C.SetStringTXTRecordValue(&service.TXTRecordRef, keyC, C.int(len([]byte(value))), valueC)
 
-		status := C.SetStringTXTRecordValue(&service.TXTRecordRef, C.CString(key), C.int(len([]byte(value))), C.CString(value))
-		if status != KDNSServiceErr_NoError {
-			return int(status)
+			//Free strings
+			C.free(unsafe.Pointer(keyC))
+			C.free(unsafe.Pointer(valueC))
 		}
-		status = C.UpdateTXTRecords(service.ServiceRef, &service.TXTRecordRef)
+		status := C.UpdateTXTRecords(service.ServiceRef, &service.TXTRecordRef)
 		return int(status)
 
 	}
