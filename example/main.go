@@ -9,10 +9,10 @@ import (
 
 func main() {
 	dnsService := godnssd.NewService(godnssd.DNSServiceConfig{
-		InterfceIndex: 0,
-		Name:          "Webserver test",
-		Protocol:      "_http._tcp",
-		Port:          1337,
+		InterfaceIndex: 0,
+		Name:           "Webserver test",
+		Protocol:       "_http._tcp",
+		Port:           1337,
 		Records: map[string]string{
 			"a": "1",
 			"b": "a",

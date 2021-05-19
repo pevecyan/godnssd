@@ -28,9 +28,9 @@ type DNSService struct {
 }
 
 type DNSServiceConfig struct {
-	InterfceIndex int
-	Name          string
-	Protocol      string
-	Port          uint16
-	Records       map[string]string
+	InterfaceIndex int
+	Name           string
+	Protocol       string
+	Port           uint16
+	Records        map[string]string
 }
