@@ -1,7 +1,8 @@
+// +build linux
 package godnssd
 
-// #cgo LDFLAGS: -L/mnt/c/Users/pevec/Documents/Development/godnssd -ldns_sd
-// #cgo CFLAGS: -I/mnt/c/Users/pevec/Documents/Development/godnssd
+// #cgo LDFLAGS: -L${SRCDIR} -ldns_sd
+// #cgo CFLAGS: -I${SRCDIR}
 // #include "dns_service.h"
 // #include <stdlib.h>
 import "C"

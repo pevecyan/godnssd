@@ -1,3 +1,4 @@
+// +build linux
 package godnssd
 
 // #cgo LDFLAGS: -L/mnt/c/Users/pevec/Documents/Development/godnssd -ldns_sd
