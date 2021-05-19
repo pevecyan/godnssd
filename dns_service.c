@@ -1,3 +1,4 @@
+// +build !windows
 #include "dns_sd.h"
 #include <arpa/inet.h>
 #include <stddef.h>
